@@ -3,7 +3,7 @@
     "integrity": "sha256-9BN5aC+a2pTqezT+hr+e4Ak1oxR75BtlaclgWlPkOP0=",
     "strip_prefix": "FreeImage",
     "patches": {
-        "openexr_compat.patch": "sha256-i3F/9leO4x+yF17BEPBMZN9lVl87bsC6IWw3zdO+v0A=",
+        "openexr_compat.patch": "sha256-LfbErmBiG5806Yq5uX5nRdF8gEYfNk0b6Hx2M4J7OCA=",
         "add_build_file.patch": "sha256-PIvc4t8aO//6ZRRMC2f3nsGSy0ndcUfdCXBphQfKYXU="
     },
     "patch_strip": 1

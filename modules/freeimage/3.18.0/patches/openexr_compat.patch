@@ -1,5 +1,5 @@
---- "a/Source/OpenEXR/IlmImf/ImfAttribute.cpp"
-+++ "b/Source/OpenEXR/IlmImf/ImfAttribute.cpp"	
+--- Source/OpenEXR/IlmImf/ImfAttribute.cpp
++++ Source/OpenEXR/IlmImf/ImfAttribute.cpp
 @@ -63,7 +63,7 @@ Attribute::~Attribute () {}
  
  namespace {
