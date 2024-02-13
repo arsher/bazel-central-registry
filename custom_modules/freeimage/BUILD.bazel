@@ -1,0 +1,330 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "zlib",
+    srcs = glob([
+        "Source/Zlib/*.c",
+    ]),
+    hdrs = glob([
+        "Source/Zlib/*.h",
+    ]),
+    copts = [
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+    includes = [
+        "Source/Zlib",
+    ],
+)
+
+cc_library(
+    name = "libopenjpeg",
+    srcs = glob(
+        [
+            "Source/LibOpenJPEG/*.c",
+        ],
+        exclude = [
+            "Source/LibOpenJPEG/thix_manager.c",
+            "Source/LibOpenJPEG/tpix_manager.c",
+            "Source/LibOpenJPEG/phix_manager.c",
+            "Source/LibOpenJPEG/ppix_manager.c",
+            "Source/LibOpenJPEG/cidx_manager.c",
+        ],
+    ),
+    hdrs = glob([
+        "Source/LibOpenJPEG/*.h",
+    ]),
+    copts = [
+        "-DOPJ_STATIC",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+)
+
+cc_library(
+    name = "libjpeg",
+    srcs = glob(
+        [
+            "Source/LibJPEG/*.c",
+        ],
+        exclude = [
+            "Source/LibJPEG/jmemdos.c",
+            "Source/LibJPEG/jmemmac.c",
+            "Source/LibJPEG/jmemansi.c",
+            "Source/LibJPEG/jmemname.c",
+            "Source/LibJPEG/rdjpgcom.c",
+            "Source/LibJPEG/jpegtran.c",
+            "Source/LibJPEG/djpeg.c",
+            "Source/LibJPEG/ckconfig.c",
+            "Source/LibJPEG/cjpeg.c",
+            "Source/LibJPEG/mkg3states.c",
+        ],
+    ),
+    hdrs = glob([
+        "Source/LibJPEG/*.h",
+    ]),
+    copts = [
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+    includes = [
+        "Source/LibJPEG",
+    ],
+)
+
+cc_library(
+    name = "libtiff4",
+    srcs = select({
+        "@bazel_tools//src/conditions:windows": glob(
+            [
+                "Source/LibTIFF4/*.c",
+            ],
+            exclude = [
+                "Source/LibTIFF4/tif_wince.c",
+                "Source/LibTIFF4/tif_vms.c",
+                "Source/LibTIFF4/tif_unix.c",
+            ],
+        ),
+        "@bazel_tools//src/conditions:linux": glob(
+            [
+                "Source/LibTIFF4/*.c",
+            ],
+            exclude = [
+                "Source/LibTIFF4/tif_wince.c",
+                "Source/LibTIFF4/tif_vms.c",
+                "Source/LibTIFF4/tif_win32.c",
+            ],
+        ),
+        "//conditions:default": glob(
+            [
+                "Source/LibTIFF4/*.c",
+            ],
+            exclude = [
+                "Source/LibTIFF4/tif_wince.c",
+                "Source/LibTIFF4/tif_vms.c",
+            ],
+        ),
+    }),
+    hdrs = glob([
+        "Source/LibTIFF4/*.h",
+    ]),
+    copts = [
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+    deps = [
+        ":libjpeg",
+        ":zlib",
+    ],
+)
+
+cc_library(
+    name = "libjxr",
+    srcs = glob([
+        "Source/LibJXR/image/**/*.c",
+        "Source/LibJXR/jxrgluelib/*.c",
+    ]),
+    hdrs = glob([
+        "Source/LibJXR/image/sys/*.h",
+        "Source/LibJXR/image/x86/*.h",
+        "Source/LibJXR/jxrgluelib/*.h",
+        "Source/LibJXR/common/include/*.h",
+    ]),
+    copts = [
+        "-DDISABLE_PERF_MEASUREMENT",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+    includes = [
+        "Source/LibJXR",
+        "Source/LibJXR/common/include",
+        "Source/LibJXR/image/sys",
+        "Source/LibJXR/jxrgluelib",
+    ],
+)
+
+cc_library(
+    name = "libwebp",
+    srcs = glob([
+        "Source/LibWebP/src/**/*.c",
+    ]),
+    hdrs = glob([
+        "Source/LibWebP/src/**/*.h",
+    ]),
+    copts = [
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+    includes = [
+        "Source/LibWebP",
+    ],
+)
+
+cc_library(
+    name = "libpng",
+    srcs = glob([
+        "Source/LibPNG/*.c",
+    ]),
+    hdrs = glob([
+        "Source/LibPNG/*.h",
+    ]),
+    copts = [
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+        ],
+        "//conditions:default": [],
+    }),
+    deps = [
+        ":zlib",
+    ],
+)
+
+cc_library(
+    name = "openexr",
+    srcs = glob(
+        [
+            "Source/OpenEXR/**/*.cpp",
+        ],
+        exclude = [
+            "Source/OpenEXR/IlmThread/IlmThreadWin32.cpp",
+            "Source/OpenEXR/IlmThread/IlmThreadMutexWin32.cpp",
+            "Source/OpenEXR/IlmThread/IlmThreadSemaphoreWin32.cpp",
+        ],
+    ),
+    hdrs = glob([
+        "Source/OpenEXR/**/*.h",
+    ]),
+    copts = [
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+            "-DCRT_SECURE_NO_DEPRECATE",
+            "/std:c++14",
+        ],
+        "//conditions:default": [
+            "-std=c++14",
+        ],
+    }),
+    includes = [
+        "Source/OpenEXR",
+        "Source/OpenEXR/Half",
+        "Source/OpenEXR/Iex",
+        "Source/OpenEXR/IexMath",
+        "Source/OpenEXR/IlmImf",
+        "Source/OpenEXR/IlmThread",
+        "Source/OpenEXR/Imath",
+    ],
+    deps = [
+        ":zlib",
+    ],
+)
+
+cc_library(
+    name = "librawlite",
+    srcs = glob(
+        [
+            "Source/LibRawLite/**/*.cpp",
+        ],
+        exclude = [
+            "Source/LibRawLite/internal/wf_filtering.cpp",
+            "Source/LibRawLite/internal/aahd_demosaic.cpp",
+            "Source/LibRawLite/internal/dht_demosaic.cpp",
+            "Source/LibRawLite/internal/libraw_xtrans_compressed.cpp",
+            "Source/LibRawLite/internal/libraw_fuji_compressed.cpp",
+            "Source/LibRawLite/src/libraw_xtrans_compressed.cpp",
+            "Source/LibRawLite/src/libraw_fuji_compressed.cpp",
+            "Source/LibRawLite/internal/libraw_x3f.cpp",
+        ],
+    ),
+    hdrs = glob([
+        "Source/LibRawLite/**/*.h",
+    ]),
+    copts = [
+        "-DLIBRAW_NODLL",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+            "-DCRT_SECURE_NO_DEPRECATE",
+            "-D_HAS_AUTO_PTR_ETC=1",
+            "/std:c++14",
+        ],
+        "//conditions:default": [
+            "-std=c++14",
+        ],
+    }),
+    includes = [
+        "Source/LibRawLite",
+    ],
+    deps = [
+        ":zlib",
+    ],
+)
+
+cc_library(
+    name = "freeimage",
+    srcs = glob(
+        [
+            "Source/**/*.cpp",
+        ],
+        exclude = [
+            "Source/LibRawLite/**/*",
+            "Source/OpenEXR/**/*",
+        ],
+    ),
+    hdrs = glob([
+        "Source/**/*.h",
+    ]),
+    copts = [
+        "-DFREEIMAGE_LIB",
+        "-DLIBRAW_NODLL",
+        "-DOPJ_STATIC",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DWIN32",
+            "-D_WIN32",
+            "-D_HAS_AUTO_PTR_ETC=1",
+            "/std:c++14",
+        ],
+        "//conditions:default": [
+            "-std=c++14",
+        ],
+    }),
+    includes = [
+        "Source",
+        "Source/DeprecationManager",
+        "Source/FreeImage",
+        "Source/LibJXR/image/sys",
+        "Source/LibJXR/jxrgluelib",
+        "Source/Metadata",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":libjxr",
+        ":libopenjpeg",
+        ":libpng",
+        ":librawlite",
+        ":libtiff4",
+        ":libwebp",
+        ":openexr",
+        ":zlib",
+    ],
+)
