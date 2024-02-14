@@ -1,0 +1,9 @@
+{
+    "url": "https://github.com/grailbio/bazel-compilation-database/archive/0.5.2.tar.gz",
+    "integrity": "sha256-0yg1sm3TWq2P0LoNcSJl32Vlo62GDTnkwBrUEFnqfto=",
+    "strip_prefix": "bazel-compilation-database-0.5.2",
+    "patch_strip": 0,
+    "patches": {
+        "module_dot_bazel.patch": "sha256-RhP4bxkSWv/G4IIr88JWPoegSklHF9DijtHTCyzSFwQ="
+    }
+}
