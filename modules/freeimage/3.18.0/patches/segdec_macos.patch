@@ -1,0 +1,15 @@
+--- a/Source/LibJXR/image/decode/segdec.c
++++ b/Source/LibJXR/image/decode/segdec.c
+@@ -28,6 +28,12 @@
+ 
+ #include "strcodec.h"
+ #include "decode.h"
++
++#ifdef __APPLE__
++#include <libkern/OSByteOrder.h>
++#define _byteswap_ulong(x) OSSwapInt32(x)
++#define _byteswap_uint64(x) OSSwapInt64(x)
++#endif
+ 
+ #ifdef MEM_TRACE
+ #define TRACE_MALLOC    1

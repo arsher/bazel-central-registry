@@ -3,8 +3,14 @@
     "integrity": "sha256-9BN5aC+a2pTqezT+hr+e4Ak1oxR75BtlaclgWlPkOP0=",
     "strip_prefix": "FreeImage",
     "patches": {
+        "gzlib_macos.patch": "sha256-0glNVSwTeFKu0sSNuWDwU5EUNpj6KOG1Lywt1dZCsqg=",
+        "gzread_macos.patch": "sha256-ahK/h9nZKLofEyi1pXEJZQ4GfBV6MJqYCarGfpUnk7Q=",
+        "gzwrite_macos.patch": "sha256-oVT6UG9zpALNwzIsd1cq7/I6vvr7s4/5Qj+Y5dJedQg=",
+        "jxrglue_macos.patch": "sha256-I4NP5Pplj0m0VByE6FXP2mkWQuLyUBauOGBQUHOai7U=",
+        "segdec_macos.patch": "sha256-ZzPPuc+ZvO+CfUt5FXTzwuC6VsumC2OV53/P4f5on5s=",
         "openexr_compat.patch": "sha256-zDo2kASabOsj9ZdGPEKtSrKqMEX17l4KxNctjtU0evU=",
-        "add_build_file.patch": "sha256-PIvc4t8aO//6ZRRMC2f3nsGSy0ndcUfdCXBphQfKYXU="
+        "module.patch": "sha256-g9KKH7Rs4z2W1URfSgZqR1kUgHeC2po6eCYDUxATobU=",
+        "add_build_file.patch": "sha256-Y/+unQerT1uc1oQvs4TU/gDhCxKkJUCuvlChc9j2L74="
     },
     "patch_strip": 1
 }
